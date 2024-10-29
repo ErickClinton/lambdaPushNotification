@@ -17,7 +17,7 @@ resource "aws_lambda_function" "hello_world" {
   filename          = data.archive_file.lambda_zip.output_path  # Aponta para o arquivo zip gerado
   source_code_hash  = data.archive_file.lambda_zip.output_base64sha256  # Usa o hash gerado pelo recurso
 
-  role = aws_iam_role.lambda_role.arn
+  role = "arn:aws:lambda:us-east-1:767397741290:function:teste"
 }
 
 # Role para execução da Lambda

@@ -18,23 +18,23 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # Substitua para sua região
+          aws-region: us-east-1  # Substitua pela sua região
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
       - name: Initialize Terraform
-        run:  |
-          cd infra                   # Mude para o diretório correto
-          terraform init
-      - name: Plan Terraform
-        id: plan
         run: |
-          cd infra                   # Mude para o diretório correto
+          cd infra  # Muda para o diretório onde estão os arquivos .tf
+          terraform init
+
+      - name: Plan Terraform
+        run: |
+          cd infra  # Muda para o diretório onde estão os arquivos .tf
           terraform plan -out=tfplan
 
       - name: Apply Terraform
         if: github.ref == 'refs/heads/main'
         run: |
-          cd infra                    # Mude para o diretório correto
+          cd infra  # Muda para o diretório onde estão os arquivos .tf
           terraform apply -auto-approve tfplan
