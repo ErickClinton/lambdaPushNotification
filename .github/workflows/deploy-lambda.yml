@@ -23,7 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Zip and deploy to Lambda
+      - name: Install AWS SAM CLI
         run: |
-          zip -r function.zip .  # Compacta o projeto
-          aws lambda update-function-code --function-name HelloWorldFunction --zip-file fileb://function.zip
+          sudo pip install aws-sam-cli
+
+      - name: Build SAM Application
+        run: sam build
+
+      - name: Deploy SAM Application
+        run: |
+          sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name HelloWorldStack --capabilities CAPABILITY_IAM
