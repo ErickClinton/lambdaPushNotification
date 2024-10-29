@@ -59,7 +59,7 @@ export const handler = async (event) => {
         console.error(`Error sending message: ${error}`);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to  ' }),
+            body: JSON.stringify({ error: 'Failed to send message ' }),
         };
     }
 };
