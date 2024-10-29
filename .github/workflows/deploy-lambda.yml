@@ -1,12 +1,12 @@
-name: Terraform Deploy
+name: Deploy Lambda
 
 on:
   push:
     branches:
-      - main  # Altere para a branch que deseja monitorar
+      - main  # Substitua pela branch que deseja monitorar para deploy
 
 jobs:
-  terraform:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,23 +18,12 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # Substitua pela sua região
+          aws-region: us-east-1  # Substitua pela região da sua Lambda
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      - name: Install dependencies
+        run: npm install
 
-      - name: Initialize Terraform
+      - name: Zip and deploy to Lambda
         run: |
-          cd infra  # Muda para o diretório onde estão os arquivos .tf
-          terraform init
-
-      - name: Plan Terraform
-        run: |
-          cd infra  # Muda para o diretório onde estão os arquivos .tf
-          terraform plan -out=tfplan
-
-      - name: Apply Terraform
-        if: github.ref == 'refs/heads/main'
-        run: |
-          cd infra  # Muda para o diretório onde estão os arquivos .tf
-          terraform apply -auto-approve tfplan
+          zip -r function.zip .  # Compacta o projeto
+          aws lambda update-function-code --function-name HelloWorldFunction --zip-file fileb://function.zip
