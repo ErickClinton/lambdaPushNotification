@@ -3,7 +3,6 @@ import AWS from 'aws-sdk';
 
 const secretsManager = new AWS.SecretsManager();
 
-// Função para buscar o segredo e corrigir o formato da chave privada
 async function getSecretValue(secretName) {
     const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
     const secret = data.SecretString ? JSON.parse(data.SecretString) : null;
@@ -15,7 +14,6 @@ async function getSecretValue(secretName) {
     return secret;
 }
 
-// Inicialize as credenciais Firebase apenas uma vez
 let firebaseInitialized = false;
 async function initializeFirebase() {
     if (!firebaseInitialized) {
