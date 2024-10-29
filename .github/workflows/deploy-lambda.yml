@@ -32,4 +32,4 @@ jobs:
 
       - name: Deploy SAM Application
         run: |
-          sam deploy --stack-name HelloWorldStack --capabilities CAPABILITY_IAM --no-confirm-changeset --no-fail-on-empty-changeset --region us-east-1
+          sam deploy --stack-name HelloWorldStack --capabilities CAPABILITY_IAM --no-confirm-changeset --no-fail-on-empty-changeset --force-upload --region us-east-1
