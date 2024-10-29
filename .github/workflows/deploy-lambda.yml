@@ -24,12 +24,17 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Initialize Terraform
-        run: terraform init
-
+        run:  |
+          cd infra                   # Mude para o diretório correto
+          terraform init
       - name: Plan Terraform
         id: plan
-        run: terraform plan -out=tfplan
+        run: |
+          cd infra                   # Mude para o diretório correto
+          terraform plan -out=tfplan
 
       - name: Apply Terraform
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve tfplan
+        run: |
+          cd infra                    # Mude para o diretório correto
+          terraform apply -auto-approve tfplan
