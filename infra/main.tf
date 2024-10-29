@@ -17,25 +17,10 @@ resource "aws_lambda_function" "hello_world" {
   filename          = data.archive_file.lambda_zip.output_path  # Aponta para o arquivo zip gerado
   source_code_hash  = data.archive_file.lambda_zip.output_base64sha256  # Usa o hash gerado pelo recurso
 
-  role = "arn:aws:lambda:us-east-1:767397741290:function:teste"
+  role = "arn:aws:iam::767397741290:user/teste"
 }
 
-# Role para execução da Lambda
-resource "aws_iam_role" "lambda_role" {
-  name = "lambda_exec_role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
+
 
 # Anexa a política de execução básica da Lambda
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
