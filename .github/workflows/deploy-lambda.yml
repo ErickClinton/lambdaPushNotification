@@ -3,7 +3,7 @@ name: Deploy Lambda
 on:
   push:
     branches:
-      - main  # Substitua pela branch que deseja monitorar para deploy
+      - main
 
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # Substitua pela região da sua Lambda
+          aws-region: us-east-1
 
       - name: Install dependencies
         run: npm install
