@@ -49,7 +49,7 @@ resource "aws_iam_role" "push_notification_lambda" {
 }
 
 resource "aws_iam_policy" "create_logs_cloudwatch" {
-  name   = "create-cw-logs-policy"
+  name   = "create-cw-logs-policy2"
   policy = data.aws_iam_policy_document.create_logs_cloudwatch.json
 }
 

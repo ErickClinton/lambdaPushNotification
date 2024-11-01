@@ -29,7 +29,6 @@ async function initializeFirebase() {
 }
 
 export const handler = async (event) => {
-    // Inicialize o Firebase antes de usar o serviço
     await initializeFirebase();
 
     const { title, body, route, fcmToken } = JSON.parse(event.body);

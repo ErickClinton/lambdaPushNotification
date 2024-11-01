@@ -1,4 +1,4 @@
-name: Deploy Lambda
+name: Deploy Lambda with Terraform
 
 on:
   push:
@@ -20,17 +20,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Install dependencies
-        working-directory: layers/got/nodejs
-        run: npm install
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.9.8
 
-      - name: Install AWS SAM CLI
-        run: |
-          sudo pip install aws-sam-cli
+      - name: Initialize Terraform
+        working-directory: infra
+        run: terraform init
 
-      - name: Build SAM Application
-        run: sam build
+      - name: Destroy existing Lambda
+        working-directory: infra
+        run: terraform destroy -auto-approve
 
-      - name: Deploy SAM Application
-        run: |
-          sam deploy --stack-name pushNotificationStack --capabilities CAPABILITY_IAM --no-confirm-changeset --no-fail-on-empty-changeset --force-upload --region us-east-1
+      - name: Apply Terraform to create new Lambda
+        working-directory: infra
+        run: terraform apply -auto-approve
