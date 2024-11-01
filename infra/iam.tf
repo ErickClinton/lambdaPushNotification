@@ -45,12 +45,23 @@ data "aws_iam_policy_document" "create_logs_cloudwatch" {
 resource "aws_iam_role" "push_notification_lambda" {
   name = "push-notification-role3"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
-  tags = local.common_tags
+  tags = {
+    Project   = "Lambda Layers with Terraform"
+    CreatedAt = formatdate("YYYY-MM-DD", timestamp())
+    ManagedBy = "Terraform"
+    Owner     = "Erick Clinton"
+  }
 }
 
 resource "aws_iam_policy" "create_logs_cloudwatch" {
-  name   = "create-cw-logs-policy2"
+  name   = "create-cw-logs-policy3"
   policy = data.aws_iam_policy_document.create_logs_cloudwatch.json
+  tags = {
+    Project   = "Lambda Layers with Terraform"
+    CreatedAt = formatdate("YYYY-MM-DD", timestamp())
+    ManagedBy = "Terraform"
+    Owner     = "Erick Clinton"
+  }
 }
 
 
