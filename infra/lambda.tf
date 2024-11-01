@@ -1,7 +1,7 @@
 
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file  = "${path.module}/../hello-world/app.mjs"
+  source_file  = "${path.module}/../push-notification/app.mjs"
   output_path = "${path.module}/function.zip"
 }
 

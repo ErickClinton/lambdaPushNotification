@@ -1,5 +1,5 @@
 {
-  "body": "{\"title\": \"Hello\", \"body\": \"This is a test\", \"route\": \"/home\", \"fcmToken\": \"fMjol_E2jETUtzx4gAfuBJ:APA91bGzTCQFUO_CUtc43IeT05BE9G2muB-yWrYoRWU9rJ2NKss8CIMUEOAOV8ib0DQ8PYHxZeaLfHfdMT-Oi_gdMF_Y6l4QCf1CnrCk-OaPa7qZLklpaPbQEon5sg7vGQcNjcejVGDx\"}",
+  "body": "{\"title\": \"Hello\", \"body\": \"This is a test\", \"route\": \"/home\", \"fcmToken\": \"seu fcmToken\"}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",
