@@ -21,6 +21,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Install dependencies
+        working-directory: layers/got/nodejs
         run: npm install
 
       - name: Install AWS SAM CLI
